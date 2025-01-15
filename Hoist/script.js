@@ -2,7 +2,7 @@
 console.log(hello);
 var hello = 'world';
 
-// After hoisting:
+// hoisted:
 var hello;
 console.log(hello); // outputs undefined
 hello = 'world';
@@ -17,7 +17,7 @@ function test() {
     console.log(needle);
 }
 
-// After hoisting:
+// hoisted:
 var needle;
 function test() {
     var needle
@@ -37,7 +37,7 @@ function print() {
 }
 console.log(brendan);
 
-// After hoisting:
+// hoisted:
 var brendan;
 function print() {
     brendan = 'only okay';
@@ -58,7 +58,7 @@ function eat() {
     food = 'gone';
 }
 
-// After hoisting:
+// hoisted:
 var food;
 function eat() {
     var food;
@@ -83,7 +83,7 @@ var mean = function() {
 };
 console.log(food);
 
-// After hoisting:
+// hoisted:
 var mean;
 console.log(food); // outputs undefined
 mean(); // Outputs an error because mean is not a function
@@ -102,7 +102,7 @@ function rewind() {
 }
 console.log(genre);
 
-// After hoisting:
+// hoisted:
 var genre;
 function rewind() {
     var genre;
@@ -130,7 +130,7 @@ function learn() {
 }
 console.log(dojo);
 
-// After hoisting:
+// hoisted:
 var dojo;
 function learn() {
     var dojo;
