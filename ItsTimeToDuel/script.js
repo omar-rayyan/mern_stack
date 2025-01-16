@@ -1,9 +1,9 @@
-import { Stack } from './Stack.js';
+import { Queue } from './Queue.js';
 import { Unit } from './Unit.js';
 import { Effect } from './Effect.js';
 import { AttackEffect } from './Effect.js';
 
-let turn = new Stack();
+let turn = new Queue();
 
 function newTurn(){
     console.log("======= New turn! =======")
@@ -11,7 +11,7 @@ function newTurn(){
         console.log("======= Turn effects: =======")
         for (let i = 0; i <= turn.size(); i++) {
             console.log("======= Effect =======");
-            const currentEffect = turn.pop();
+            const currentEffect = turn.dequeue();
             const unit = currentEffect.unit;
             const effect = currentEffect.effect;
             unit.playEffect(effect);
@@ -29,7 +29,7 @@ function addEffect(unit, effect){
         unit: unit,
         effect: effect
     };
-    turn.push(effectDict);
+    turn.enqueue(effectDict);
     console.log(`Next Turn: Effect added for unit ${unit.name} with effect ${effect.name}`);
 }
 
