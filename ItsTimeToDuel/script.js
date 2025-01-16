@@ -33,7 +33,6 @@ function addEffect(unit, effect){
     console.log(`Next Turn: Effect added for unit ${unit.name} with effect ${effect.name}`);
 }
 
-newTurn();
 const red_belt_ninja = new Unit("Red Belt Ninja", 3, 3, 4);
 const hard_algorithim = new Effect("Hard Algorithim", 2, "increases target's resilience by 3", "resilience", 3);
 addEffect(red_belt_ninja, hard_algorithim);
