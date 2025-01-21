@@ -1,0 +1,83 @@
+/* General Container Styling */
+div.todo-list-container {
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Task Item Styling */
+  div.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  div.task-item:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+  }
+  
+  /* Task Label Styling */
+  div.task-item label {
+    font-size: 1rem;
+    flex: 1;
+    margin-right: 10px;
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s, text-decoration 0.3s;
+  }
+  
+  div.task-item label.completed {
+    text-decoration: line-through;
+    color: gray;
+  }
+  
+  /* Checkbox Styling */
+  div.task-item input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  /* Delete Button Styling */
+  div.task-item button {
+    background-color: #ff4c4c;
+    color: white;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  div.task-item button:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 500px) {
+    div.todo-list-container {
+      width: 90%;
+    }
+  
+    div.task-item label {
+      font-size: 0.9rem;
+    }
+  
+    div.task-item button {
+      font-size: 0.8rem;
+      padding: 4px 8px;
+    }
+  }
+  

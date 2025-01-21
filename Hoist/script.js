@@ -20,7 +20,7 @@ function test() {
 // hoisted:
 var needle;
 function test() {
-    var needle
+    var needle;
     needle = 'magnet';
     console.log(needle); // outputs 'magnet'
 }
