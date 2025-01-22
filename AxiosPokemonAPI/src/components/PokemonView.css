@@ -1,0 +1,92 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Center the component */
+form {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form styling */
+form input[type="submit"] {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Pokémon list container */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 600px;
+    overflow-y: auto;
+    height: 60vh;
+    width: 50vh;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Individual Pokémon items */
+ul li {
+    background-color: #f9f9f9;
+    width: 10vh;
+    margin: 1vh 1vh;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    transition: transform 0.2s, background-color 0.3s;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
+ul li:hover {
+    background-color: #4caf50;
+    color: white;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* Scrollbar styling */
+ul::-webkit-scrollbar {
+    width: 10px;
+}
+
+ul::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
