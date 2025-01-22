@@ -21,6 +21,11 @@ div.todo-list-container {
     background-color: white;
     transition: background-color 0.3s, transform 0.2s;
   }
+
+  .empty-list-message {
+    color: #635c5c;
+    font-weight: 550;
+  }
   
   div.task-item:hover {
     background-color: #f0f0f0;
