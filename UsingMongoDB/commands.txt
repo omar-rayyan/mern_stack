@@ -1,0 +1,436 @@
+[omar@imperialist ~]$ mongosh "mongodb+srv://cluster0.tpxku.mongodb.net/" --apiVersion 1 --username omar
+Enter password: ***********
+Current Mongosh Log ID: 67977cda0d4fb4f686544ca6
+Connecting to:          mongodb+srv://<credentials>@cluster0.tpxku.mongodb.net/?appName=mongosh+2.3.8
+Using MongoDB:          8.0.4 (API Version 1)
+Using Mongosh:          2.3.8
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+Atlas atlas-m39urk-shard-0 [primary] test> use my_first_db;
+switched to db my_first_db
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> 
+
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.insertOne({
+     name: "John Doe",
+     home_state: "California",
+     lucky_number: 7,
+     birthday: { month: 5, day: 12, year: 1995 }
+ });
+{
+  acknowledged: true,
+  insertedId: ObjectId('67977d270d4fb4f686544ca7')
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.insertOne({
+     name: "Jane Smith",
+     home_state: "Washington",
+     lucky_number: 4,
+     birthday: { month: 8, day: 22, year: 1993 }
+ });
+{
+  acknowledged: true,
+  insertedId: ObjectId('67977d2f0d4fb4f686544ca8')
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.insertOne({
+     name: "Alice Johnson",
+     home_state: "California",
+     lucky_number: 2,
+     birthday: { month: 3, day: 15, year: 1998 }
+ });
+{
+  acknowledged: true,
+  insertedId: ObjectId('67977d320d4fb4f686544ca9')
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.insertOne({
+     name: "Bob Brown",
+     home_state: "New York",
+     lucky_number: 6,
+     birthday: { month: 1, day: 10, year: 1990 }
+ });
+{
+  acknowledged: true,
+  insertedId: ObjectId('67977d360d4fb4f686544caa')
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.insertOne({
+     name: "Chris Green",
+     home_state: "Washington",
+     lucky_number: 5,
+     birthday: { month: 10, day: 30, year: 1991 }
+ });
+{
+  acknowledged: true,
+  insertedId: ObjectId('67977d3a0d4fb4f686544cab')
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.find();
+[
+  {
+    _id: ObjectId('67977d270d4fb4f686544ca7'),
+    name: 'John Doe',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 5, day: 12, year: 1995 }
+  },
+  {
+    _id: ObjectId('67977d2f0d4fb4f686544ca8'),
+    name: 'Jane Smith',
+    home_state: 'Washington',
+    lucky_number: 4,
+    birthday: { month: 8, day: 22, year: 1993 }
+  },
+  {
+    _id: ObjectId('67977d320d4fb4f686544ca9'),
+    name: 'Alice Johnson',
+    home_state: 'California',
+    lucky_number: 2,
+    birthday: { month: 3, day: 15, year: 1998 }
+  },
+  {
+    _id: ObjectId('67977d360d4fb4f686544caa'),
+    name: 'Bob Brown',
+    home_state: 'New York',
+    lucky_number: 6,
+    birthday: { month: 1, day: 10, year: 1990 }
+  },
+  {
+    _id: ObjectId('67977d3a0d4fb4f686544cab'),
+    name: 'Chris Green',
+    home_state: 'Washington',
+    lucky_number: 5,
+    birthday: { month: 10, day: 30, year: 1991 }
+  }
+]
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.find({ home_state: { $in: ["California", "Washington"] } });
+[
+  {
+    _id: ObjectId('67977d270d4fb4f686544ca7'),
+    name: 'John Doe',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 5, day: 12, year: 1995 }
+  },
+  {
+    _id: ObjectId('67977d2f0d4fb4f686544ca8'),
+    name: 'Jane Smith',
+    home_state: 'Washington',
+    lucky_number: 4,
+    birthday: { month: 8, day: 22, year: 1993 }
+  },
+  {
+    _id: ObjectId('67977d320d4fb4f686544ca9'),
+    name: 'Alice Johnson',
+    home_state: 'California',
+    lucky_number: 2,
+    birthday: { month: 3, day: 15, year: 1998 }
+  },
+  {
+    _id: ObjectId('67977d3a0d4fb4f686544cab'),
+    name: 'Chris Green',
+    home_state: 'Washington',
+    lucky_number: 5,
+    birthday: { month: 10, day: 30, year: 1991 }
+  }
+]
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.find({ lucky_number: { $gt: 3 } });
+[
+  {
+    _id: ObjectId('67977d270d4fb4f686544ca7'),
+    name: 'John Doe',
+    home_state: 'California',
+    lucky_number: 7,
+    birthday: { month: 5, day: 12, year: 1995 }
+  },
+  {
+    _id: ObjectId('67977d2f0d4fb4f686544ca8'),
+    name: 'Jane Smith',
+    home_state: 'Washington',
+    lucky_number: 4,
+    birthday: { month: 8, day: 22, year: 1993 }
+  },
+  {
+    _id: ObjectId('67977d360d4fb4f686544caa'),
+    name: 'Bob Brown',
+    home_state: 'New York',
+    lucky_number: 6,
+    birthday: { month: 1, day: 10, year: 1990 }
+  },
+  {
+    _id: ObjectId('67977d3a0d4fb4f686544cab'),
+    name: 'Chris Green',
+    home_state: 'Washington',
+    lucky_number: 5,
+    birthday: { month: 10, day: 30, year: 1991 }
+  }
+]
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "John Doe" },
+     { $set: { interests: ["coding", "brunch", "MongoDB"] } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Jane Smith" },
+     { $set: { interests: ["coding", "brunch", "MongoDB"] } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Alice Johnson" },
+     { $set: { interests: ["coding", "brunch", "MongoDB"] } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Bob Brown" },
+     { $set: { interests: ["coding", "brunch", "MongoDB"] } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Chris Green" },
+     { $set: { interests: ["coding", "brunch", "MongoDB"] } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "John Doe" },
+     { $push: { interests: { $each: ["guitar", "hiking"] } } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Jane Smith" },
+     { $push: { interests: { $each: ["photography", "dancing"] } } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Alice Johnson" },
+     { $push: { interests: { $each: ["reading", "baking"] } } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Bob Brown" },
+     { $push: { interests: { $each: ["traveling", "gaming"] } } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Chris Green" },
+     { $push: { interests: { $each: ["sports", "yoga"] } } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "John Doe" },
+     { $push: { interests: "taxes" } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "John Doe" },
+     { $pull: { interests: "taxes" } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.deleteOne({ home_state: "California" });
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.deleteOne({ home_state: "California" });
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.deleteOne({ name: "Bob Brown" });
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.deleteOne({ lucky_number: { $gt: 5 } });
+{ acknowledged: true, deletedCount: 0 }
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "John Doe" },
+     { $set: { number_of_belts: 0 } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Jane Smith" },
+     { $set: { number_of_belts: 0 } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Alice Johnson" },
+     { $set: { number_of_belts: 0 } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Bob Brown" },
+     { $set: { number_of_belts: 0 } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Chris Green" },
+     { $set: { number_of_belts: 0 } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Jane Smith", home_state: "Washington" },
+     { $inc: { number_of_belts: 1 } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Chris Green", home_state: "Washington" },
+     { $inc: { number_of_belts: 1 } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "John Doe" },
+     { $set: { updated_on: new Date() } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Jane Smith" },
+     { $set: { updated_on: new Date() } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Alice Johnson" },
+     { $set: { updated_on: new Date() } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Bob Brown" },
+     { $set: { updated_on: new Date() } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> db.students.updateOne(
+     { name: "Chris Green" },
+     { $set: { updated_on: new Date() } }
+ );
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-m39urk-shard-0 [primary] my_first_db> 
