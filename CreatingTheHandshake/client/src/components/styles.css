@@ -1,0 +1,14 @@
+.layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.ant-layout-header {
+    background-color: #1890ff;
+    text-align: center;
+}
+
+.ant-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
