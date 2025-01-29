@@ -1,6 +1,7 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import './styles.css';
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const initialState = {
     title: "",
@@ -28,18 +29,21 @@ const reducer = (state, action) => {
 
 const ProductForm = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const { id } = useParams();
+    const isSubmitTrigger = !id;
+    const navigate = useNavigate();
 
-    const validateField = (field, value, isSubmitTrigger) => {
+    const validateField = (field, value) => {
         switch (field) {
             case "title":
-                if (value.length < 1 && !isSubmitTrigger) return "";
+                if (value.length < 1 && isSubmitTrigger) return "";
                 if (value.length < 2) {
                     const error = "Title must be 2 characters or longer!";
                     dispatch({ type: "SET_FIELD", field: field, value, error });
                 }
                 return "";
             case "description":
-                if (value.length < 1 && !isSubmitTrigger) return "";
+                if (value.length < 1 && isSubmitTrigger) return "";
                 if (value.length < 2) {
                     const error = "Email must be 2 characters or longer!";
                     dispatch({ type: "SET_FIELD", field: field, value, error });
@@ -48,32 +52,56 @@ const ProductForm = () => {
         }
     };
 
+    useEffect(() => {
+        if (!isSubmitTrigger) {
+            axios.get(`http://localhost:8000/api/products/${id}`)
+                .then((response) => {
+                    const productData = response.data.Product;
+                    dispatch({ type: "SET_FIELD", field: "title", value: productData.title });
+                dispatch({ type: "SET_FIELD", field: "price", value: productData.price });
+                dispatch({ type: "SET_FIELD", field: "description", value: productData.description });
+                })
+                .catch((error) => console.log(error));
+        }
+    }, [id, isSubmitTrigger]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         dispatch({ type: "SET_FIELD", field: name, value });
-        validateField(name, value, false);
+        validateField(name, value);
     };
 
-    const createProduct = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const { title, price, description} = state;
-        const errors = validateField("title", title, true) + validateField("description", description, true);
+        const productData = { title, description, price: parseFloat(price) };
+        const errors = validateField("title", title) + validateField("description", description);
+        
         if(price.length < 1) {
             const error = "Please enter a price first.";
             dispatch({ type: "SET_FIELD", field: "price", price, error });
             return;
         }
+
         if (errors.length > 1) return;
-        axios.post('http://localhost:8000/api/products/create', {title, description, price})
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err))
+
+        if (isSubmitTrigger) {
+            axios.post("http://localhost:8000/api/products/create", productData)
+                .then(() => navigate("/"))
+                .catch((error) => console.log(error));
+        } else {
+            axios.patch(`http://localhost:8000/api/products/update/${id}`, productData)
+                .then(() => navigate("/"))
+                .catch((error) => console.log(error));
+        }
+
         dispatch({ type: "RESET" });
     };
 
     return (
         <div className="container">
-            <form onSubmit={createProduct} className="form">
-                <h1 className="form-title">Create Product</h1>
+            <form onSubmit={handleSubmit} className="form">
+                <h1 className="form-title">{isSubmitTrigger ? "Create Product" : "Edit Product"}</h1>
                 <div className="form-group">
                     <label className="form-label">Title:</label>
                     <input
@@ -108,6 +136,7 @@ const ProductForm = () => {
                     {state.descriptionError && <p className="error-message">{state.descriptionError}</p>}
                 </div>
                 <button type="submit" className="form-submit-button">Submit</button>
+                {!isSubmitTrigger && <div><br/><Link to={"/"}>Back To Home</Link></div>}
             </form>
         </div>
     );

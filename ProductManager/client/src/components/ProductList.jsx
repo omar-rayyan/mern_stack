@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles.css';
+import DeleteButton from './DeleteButton';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -19,12 +20,8 @@ const ProductList = () => {
             });
     }, [products]);
 
-    const deleteProduct = (productId) => {
-        axios.delete('http://localhost:8000/api/products/delete/' + productId)
-        .then(response => {
-            navigate("/");
-        })
-        .catch(error => console.log(error));
+    const refreshProductList = () => {
+        navigate("/");
     }
 
     return (
@@ -36,7 +33,7 @@ const ProductList = () => {
                         <li key={product._id}>
                             <Link to={`/products/${product._id}`}>
                                 {product.title}
-                            </Link> | <Link to={`/products/${product._id}/update`}>Update</Link> | <Link onClick={() => deleteProduct(product._id)}>Delete</Link>
+                            </Link> | <Link to={`/products/${product._id}/update`}>Update</Link> | <DeleteButton productId={product._id} onDelete={() => refreshProductList()} />
                             
                         </li>
                     )))
