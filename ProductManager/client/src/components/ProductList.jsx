@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles.css';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/products')
@@ -18,6 +19,14 @@ const ProductList = () => {
             });
     }, [products]);
 
+    const deleteProduct = (productId) => {
+        axios.delete('http://localhost:8000/api/products/delete/' + productId)
+        .then(response => {
+            navigate("/");
+        })
+        .catch(error => console.log(error));
+    }
+
     return (
         <div className="container products-container">
             <h1 className="form-title">Products List:</h1>
@@ -27,7 +36,8 @@ const ProductList = () => {
                         <li key={product._id}>
                             <Link to={`/products/${product._id}`}>
                                 {product.title}
-                            </Link>
+                            </Link> | <Link to={`/products/${product._id}/update`}>Update</Link> | <Link onClick={() => deleteProduct(product._id)}>Delete</Link>
+                            
                         </li>
                     )))
                 }
